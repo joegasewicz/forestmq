@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
     u_int16_t msg_size = FMQ_MESSAGE_SIZE;
     u_int16_t port = FMQ_TCP_PORT;
     int8_t log_level = FMQ_LOG_LEVEL_NONE;
+    char allowed_hosts[FMQ_ALLOWED_HOSTS_BYTES] = FMQ_DEFAULT_ALLOWED_HOSTS;
     bool run_as_daemon = false;
     pid_t daemon_pid;
     const char *FORESTMQ_DAEMON = getenv("FORESTMQ_DAEMON");
