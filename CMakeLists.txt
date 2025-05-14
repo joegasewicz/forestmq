@@ -10,14 +10,16 @@ add_executable(forest_mq main.c
         provider.h
         queue.c
         queue.h
-        exchange.c
-        exchange.h
         config.c
         config.h
         server.c
         server.h
         utils.c
         utils.h
+        amqp.c
+        amqp.h
+        tcp.c
+        tcp.h
 )
 
 find_package(PkgConfig REQUIRED)
@@ -39,6 +41,7 @@ if (APPLE)
             PRIVATE
             ${BREW_ROOT}/Cellar/jansson/2.14/include
             ${BREW_ROOT}/Cellar/libevent/2.1.12_1/include
+            ${BREW_ROOT}/Cellar/rabbitmq-c/0.15.0/include
     )
 elseif (UNIX)
     target_include_directories(
@@ -56,7 +59,7 @@ if (APPLE)
             PRIVATE
             ${BREW_ROOT}/Cellar/jansson/2.14/lib/libjansson.dylib
             ${BREW_ROOT}/Cellar/libevent/2.1.12_1/lib/libevent.dylib
-
+            ${BREW_ROOT}/Cellar/rabbitmq-c/0.15.0/lib/librabbitmq.dylib
     )
 elseif(UNIX)
     target_link_libraries(
@@ -64,5 +67,6 @@ elseif(UNIX)
             PRIVATE
             jansson
             event
+            rabbitmq
     )
 endif ()
