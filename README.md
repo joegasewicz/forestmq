@@ -1,7 +1,8 @@
 ![ForestMQ](assets/fmq_logo.png?raw=true "ForestMQ")
 Message Queue built on [libevent](https://libevent.org/)
 
-⚠️ Production ready in v1.0.0
+
+⚠️ Moved to 👉 [ForestMQ](https://github.com/josefdigital/forestmq)
 
 ### Project Status
 🎉 Forest MQ is now usable for test / hobby projects or the curious.
