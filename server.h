@@ -7,7 +7,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "queue.h"
-#include "config.h"
 
 
 typedef struct FMQ_Server           FMQ_Server;
