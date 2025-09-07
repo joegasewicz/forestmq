@@ -67,8 +67,8 @@ dequeue messages off the queue.
 | `FORESTMQ_PORT`   | INT  | TCP Server port to listen on |
 
 ### Clients
-- ForestMQ Python client [https://github.com/joegasewicz/forestmq-python](forestmq-python)
-- ForestMQ Go client [https://github.com/joegasewicz/forestmq-go](forestmq-go)
+- ForestMQ Python client [forestmq-python](https://github.com/joegasewicz/forestmq-python)
+- ForestMQ Go client [forestmq-go](https://github.com/joegasewicz/forestmq-go)
 
 ### Health
 To check the health of a running ForestMQ instance:
