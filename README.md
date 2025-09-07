@@ -8,7 +8,7 @@ Message Queue built on [libevent](https://libevent.org/)
 
 ### Features
 - TCP ✅
-- amqp-v2.0 ✅
+- amqp-v2.0 🚧
 - Multiple queues `TODO`
 - Message acknowledgement `TODO`
 - Message durability / persist `TODO`
@@ -25,7 +25,7 @@ Message Queue built on [libevent](https://libevent.org/)
 ### Quick Start
 #### Run with Docker
 ```
-docker run -p 8005:8005 josefdigital/forestmq:0.6.2
+docker run -p 8005:8005 josefdigital/forestmq:0.6.4
 ```
 
 Forest MQ is still in very early stages of development, but
