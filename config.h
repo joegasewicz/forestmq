@@ -13,10 +13,11 @@
 
 #define FMQ_LOGGER(level, ...) \
 { \
-  if (level > 0) \
-  { \
-    printf(__VA_ARGS__);  \
-  } \
+if (level > 0) \
+{ \
+printf("[FORESTMQ]: " __VA_ARGS__);  \
+fflush(stdout); \
+} \
 }\
 
 /* Macros */

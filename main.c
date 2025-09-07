@@ -28,7 +28,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdbool.h>
-#include <getopt.h>
 #include "config.h"
 #include "queue.h"
 #include "server.h"
@@ -37,8 +36,9 @@ int main(int argc, char *argv[])
 {
     u_int16_t msg_size = FMQ_MESSAGE_SIZE;
     u_int16_t port = FMQ_TCP_PORT;
-    int8_t log_level = FMQ_LOG_LEVEL_NONE;
+    int8_t log_level = FMQ_LOG_LEVEL_DEBUG;
     char user_hosts[FMQ_ALLOWED_HOSTS_BYTES] = FMQ_DEFAULT_ALLOWED_HOSTS;
+    char *allowed_hosts[FMQ_ALLOWED_HOSTS_BYTES];
     bool run_as_daemon = false;
     pid_t daemon_pid;
     const char *FORESTMQ_DAEMON = getenv("FORESTMQ_DAEMON");
@@ -56,55 +56,62 @@ int main(int argc, char *argv[])
             goto port_arg_error;
         FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Set TCP Server port to %s\n", FORESTMQ_PORT);
     }
-
-    struct option long_options[] = {
-        {"msg-size", required_argument, NULL, 'm'},
-        {"port", required_argument, NULL, 'p'},
-        {"log-level", required_argument, NULL, 'l'},
-        {"daemon", no_argument, NULL, 'd'},
-        {"hosts", required_argument, NULL, 'h'},
-        {0, 0, 0, 0}
-    };
-
-    int option_index = 0;
-    int c;
-    while ((c = getopt_long(argc, argv, "m:p:l:dh:", long_options, &option_index)) != -1)
+    for (int i = 0; i < argc; i++)
     {
-        switch (c)
+        if (strcmp(argv[i], "--msg-size") == 0)
         {
-            case 'm':
-                msg_size = atoi(optarg);
-                if (msg_size <= 0)
-                    goto msg_size_arg_error;
-                FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Set queue message size to %s\n", optarg);
-                break;
-            case 'p':
-                port = atoi(optarg);
-                if (port < 80)
-                    goto port_arg_error;
-                FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Set TCP Server port to %s\n", optarg);
-                break;
-            case 'l':
-                if (strcmp(optarg, "none") == 0)
-                    log_level = FMQ_LOG_LEVEL_NONE;
-                else if (strcmp(optarg, "debug") == 0)
-                    log_level = FMQ_LOG_LEVEL_DEBUG;
-                else
-                    goto log_arg_error;
-                FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Log level set to %s\n", optarg);
-                break;
-            case 'd':
+            if (argc < i+1)
+            {
+                printf("--msg-size arg expects an integer value\n");
+                exit(EXIT_FAILURE);
+            }
+            char *msg_size_char = argv[i+1];
+            msg_size = atoi(msg_size_char);
+            if (msg_size <= 0)
+                goto msg_size_arg_error;
+            FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Set queue message size to %s\n", msg_size_char);
+        }
+        if (strcmp(argv[i], "--port") == 0)
+        {
+            if (argc < i+1)
+                goto port_arg_error;
+            char *port_char = argv[i+1];
+            port = atoi(port_char);
+            if (port < 80)
+                goto port_arg_error;
+            FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Set TCP Server port to %s\n", port_char);
+        }
+        if (strcmp(argv[i], "--log-level") == 0)
+        {
+            if (argc < i+1)
+                goto log_arg_error;
+            char *log_level_char = argv[i+1];
+            if (log_level_char == NULL)
+                goto log_arg_error;
+            if (strcmp(log_level_char, "none") == 0)
+                log_level = FMQ_LOG_LEVEL_NONE;
+            else if (strcmp(log_level_char, "debug") == 0)
+                log_level = FMQ_LOG_LEVEL_DEBUG;
+            else goto log_arg_error;
+            FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Log level set to %s\n", log_level_char);
+        }
+        if (strcmp(argv[i], "--daemon") == 0)
+        {
+            if (!run_as_daemon)
+            {
                 run_as_daemon = true;
                 FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Running ForestMQ in daemon mode\n");
-                break;
-            case 'h':
-                strcpy(user_hosts, optarg);
-                FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Allowed hosts set to %s\n", user_hosts);
-                break;
-            case '?':
-                return EXIT_FAILURE;
-            default:
-                break;
+            }
+        }
+        if (strcmp(argv[i], "--hosts") == 0)
+        {
+            if (argc < i+1)
+                goto allowed_hosts_error;
+            char *allowed_hosts_char = argv[i+1];
+            if (allowed_hosts_char == NULL)
+                goto allowed_hosts_error;
+            strcpy(user_hosts, allowed_hosts_char);
+            FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "Allowed hosts set to %s\n", user_hosts);
         }
     }
 
