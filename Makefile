@@ -48,3 +48,6 @@ docs_cname:
 docs_build:
 	cd docs && pipenv run mkdocs build
 	cd docs && echo "forestmq.dev" > site/CNAME
+
+docs_publish:
+	cd docs && mkdocs gh-deploy
