@@ -41,3 +41,10 @@ docker-remove:
 
 docker_img_exec:
 	docker run --rm -it --entrypoint /bin/bash $(IMG_NAME)
+
+docs_cname:
+	echo "forestmq.dev" > site/CNAME
+
+docs_build:
+	cd docs && pipenv run mkdocs build
+	cd docs && echo "forestmq.dev" > site/CNAME

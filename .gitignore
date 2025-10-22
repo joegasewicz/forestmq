@@ -1,4 +1,7 @@
 .idea
+
+docs/site
+
 build
 cmake-build-debug
 */.idea

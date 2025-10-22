@@ -1,4 +1,4 @@
-![ForestMQ](assets/fmq_logo.png?raw=true "ForestMQ")
+![ForestMQ](docs/docs/images/fmq_logo.png?raw=true "ForestMQ")
 Message Queue built on [libevent](https://libevent.org/)
 
 ⚠️ Production ready in v1.0.0
