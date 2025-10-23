@@ -1,3 +1,0 @@
-/Users/joework/CLionProjects/forestmq/cmake-build-debug/CMakeFiles/forest_mq.dir
-/Users/joework/CLionProjects/forestmq/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/joework/CLionProjects/forestmq/cmake-build-debug/CMakeFiles/rebuild_cache.dir
