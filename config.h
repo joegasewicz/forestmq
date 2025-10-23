@@ -27,23 +27,23 @@
     } \
 }\
 
-#define _FMQ_LOGGER(level, color, ...) \
+#define _FMQ_LOGGER(level, icon, color, ...) \
 { \
     if (level > 0) \
     { \
-        printf(color "[FORESTMQ]: "  __VA_ARGS__);  \
+        printf(color icon __VA_ARGS__);  \
         printf(ANSI_COLOR_RESET); \
         fflush(stdout); \
     } \
 }\
 
 #define FMQ_LOGGER_WHITE(level, ...) FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, __VA_ARGS__)
-#define FMQ_LOGGER_RED(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, ANSI_COLOR_RED, __VA_ARGS__)
-#define FMQ_LOGGER_GREEN(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, ANSI_COLOR_GREEN, __VA_ARGS__)
-#define FMQ_LOGGER_YELLOW(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, ANSI_COLOR_YELLOW, __VA_ARGS__)
-#define FMQ_LOGGER_BLUE(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, ANSI_COLOR_BLUE, __VA_ARGS__)
-#define FMQ_LOGGER_MAGENTA(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, ANSI_COLOR_MAGENTA, __VA_ARGS__)
-#define FMQ_LOGGER_CYAN(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, ANSI_COLOR_CYAN, __VA_ARGS__)
+#define FMQ_LOGGER_RED(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "✖ ", ANSI_COLOR_RED, __VA_ARGS__)
+#define FMQ_LOGGER_GREEN(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "✔︎ ", ANSI_COLOR_GREEN, __VA_ARGS__)
+#define FMQ_LOGGER_YELLOW(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "✔︎ ", ANSI_COLOR_YELLOW, __VA_ARGS__)
+#define FMQ_LOGGER_BLUE(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "⬥ ", ANSI_COLOR_BLUE, __VA_ARGS__)
+#define FMQ_LOGGER_MAGENTA(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "⬥ ", ANSI_COLOR_MAGENTA, __VA_ARGS__)
+#define FMQ_LOGGER_CYAN(level, ...) _FMQ_LOGGER(FMQ_LOG_LEVEL_DEBUG, "⬥ ", ANSI_COLOR_CYAN, __VA_ARGS__)
 
 /* Macros */
 #define FMQ_ARRAY_LENGTH(arr) sizeof(arr) / sizeof(arr[0])

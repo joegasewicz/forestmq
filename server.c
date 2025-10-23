@@ -62,7 +62,7 @@ static void resp_callback(struct evhttp_request *req, void *server)
     }
     else
     {
-        FMQ_LOGGER_GREEN(q->log_level, "{server}: %s %s HTTP/1.1 \n",  method, request_uri);
+        FMQ_LOGGER_GREEN(FMQ_LOG_LEVEL_NONE, "{server}: %s %s HTTP/1.1 \n",  method, request_uri);
 
         // check the method & path
         if (strcmp(method, "POST") == 0 && strcmp(request_uri, "/provider") == 0)

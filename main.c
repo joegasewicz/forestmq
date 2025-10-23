@@ -160,17 +160,17 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 
 msg_size_arg_error:
-    printf("--msg-size arg expects an unsigned integer value\n");
+    FMQ_LOGGER_RED(FMQ_LOG_LEVEL_NONE, "--msg-size arg expects an unsigned integer value\n");
     exit(EXIT_FAILURE);
 port_arg_error:
-    printf(
+    FMQ_LOGGER_RED(FMQ_LOG_LEVEL_NONE,
         "Arg Error:\n"
         "--port arg must be set to 80 or above\n"
     );
     exit(EXIT_FAILURE);
 
 log_arg_error:
-    printf(
+    FMQ_LOGGER_RED(FMQ_LOG_LEVEL_NONE
         "Arg Error:\n"
         "--log-level should be set to the following:\n"
         "\t`--log-level none` - no logs\n"
@@ -178,7 +178,7 @@ log_arg_error:
     );
     exit(EXIT_FAILURE);
 allowed_hosts_error:
-    printf(
+    FMQ_LOGGER_RED(FMQ_LOG_LEVEL_NONE
          "Arg Error:\n"
          "--hosts should be set like the following:\n"
          "\t`--hosts localhost,0.0.0.0`\n"
