@@ -53,7 +53,7 @@ static void resp_callback(struct evhttp_request *req, void *server)
     const char *method = get_req_method(cmd);
     if (strcmp(method, "unknown") == 0)
     {
-        FMQ_LOGGER(q->log_level, "Host:%s not allowed\n", request_host);
+        FMQ_LOGGER_RED(q->log_level, "Host:%s not allowed\n", request_host);
         evhttp_send_reply(req, 400, "Method not recognized", reply);
     }
     else if (host_allowed == false)
@@ -62,7 +62,7 @@ static void resp_callback(struct evhttp_request *req, void *server)
     }
     else
     {
-        FMQ_LOGGER(q->log_level, "{server}: %s %s HTTP/1.1 \n",  method, request_uri);
+        FMQ_LOGGER_GREEN(q->log_level, "{server}: %s %s HTTP/1.1 \n",  method, request_uri);
 
         // check the method & path
         if (strcmp(method, "POST") == 0 && strcmp(request_uri, "/provider") == 0)
@@ -123,7 +123,7 @@ static int start_server(FMQ_Server *s)
     struct event *sig_int = evsignal_new(base, SIGINT, my_signal_event_cb, base);
     event_add(sig_int, NULL);
 
-    FMQ_LOGGER(s->log_level, "Listening on http://%s:%d (%d)\n", http_addr, http_port, http_handle);
+    FMQ_LOGGER_GREEN(s->log_level, "Listening on http://%s:%d (%d)\n", http_addr, http_port, http_handle);
     event_base_dispatch(base);
 
     evhttp_free(http_server);

@@ -19,7 +19,7 @@ void consumer_callback(struct evhttp_request *req, struct evbuffer *reply, void 
     const FMQ_QNode *node = FMQ_Queue_dequeue((FMQ_Queue*)queue);
     if (node == NULL)
     {
-        FMQ_LOGGER(q->log_level ,"{consumer}: Queue is empty\n");
+        FMQ_LOGGER_CYAN(q->log_level ,"{consumer}: Queue is empty\n");
         json_t *root = json_object();
         json_object_set_new(root, "error", json_string("Queue is empty!"));
         char *json_str = json_dumps(root, JSON_INDENT(4));
@@ -49,8 +49,8 @@ void consumer_callback(struct evhttp_request *req, struct evbuffer *reply, void 
         return;
     }
     char *msg_dump = json_dumps(message_load, JSON_COMPACT);
-    FMQ_LOGGER(q->log_level, "{consumer}: Successfully dequeued message for consumer\n");
-    FMQ_LOGGER(q->log_level, "{consumer}: Received: %s\n", msg_dump);
+    FMQ_LOGGER_GREEN(q->log_level, "{consumer}: Successfully dequeued message for consumer\n");
+    FMQ_LOGGER_CYAN(q->log_level, "{consumer}: Received: %s\n", msg_dump);
     free(msg_dump);
     free((FMQ_Data*)node->data);
     free((FMQ_QNode*)node);
@@ -82,12 +82,12 @@ void provider_callback(struct evhttp_request *req, struct evbuffer *reply, void 
     json_error_t error;
     json_t *json_req_object = json_loads(body_data, JSON_INDENT(0), &error);
     if (strlen(error.text) > 0)
-        FMQ_LOGGER(q->log_level, "{provider} ERROR: %s\n", error.text);
+        FMQ_LOGGER_RED(q->log_level, "{provider} ERROR: %s\n", error.text);
     // get JSON object's values
     json_t *message = json_object_get(json_req_object, "message");
     if (message == NULL)
     {
-        FMQ_LOGGER(q->log_level, "{provider} ERROR: No JSON in request body\n");
+        FMQ_LOGGER_RED(q->log_level, "{provider} ERROR: No JSON in request body\n");
         json_t *root = json_object();
         json_object_set_new(root, "error", json_string("expected 'message' key in JSON"));
         char *json_str = json_dumps(root, JSON_INDENT(4));
@@ -103,7 +103,7 @@ void provider_callback(struct evhttp_request *req, struct evbuffer *reply, void 
     const bool destroy = json_boolean_value(json_object_get(json_req_object, "destroy"));
     if (destroy)
     {
-        FMQ_LOGGER(q->log_level, "{provider}: Successfully destroyed queue\n");
+        FMQ_LOGGER_MAGENTA(q->log_level, "{provider}: Successfully destroyed queue\n");
         char *json_str = json_dumps(message, JSON_INDENT(4));
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wformat-security"
@@ -115,7 +115,7 @@ void provider_callback(struct evhttp_request *req, struct evbuffer *reply, void 
         return;
     }
     // Handle successful request & do queue operations
-    FMQ_LOGGER(q->log_level, "{provider}: Received message successfully\n");
+    FMQ_LOGGER_GREEN(q->log_level, "{provider}: Received message successfully\n");
     FMQ_Data *data = (FMQ_Data*)malloc(sizeof(FMQ_Queue));
     data->message = malloc(sizeof(char) * q->msg_size);
     // json_dumps must be freed before we can deallocate message

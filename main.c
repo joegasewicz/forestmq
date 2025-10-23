@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
     const char *FORESTMQ_DAEMON = getenv("FORESTMQ_DAEMON");
     const char *FORESTMQ_PORT = getenv("FORESTMQ_PORT");
 
+    printf(ANSI_COLOR_GREEN FMQ_PREAMBLE_MSG ANSI_COLOR_RESET);
+
     if (FORESTMQ_DAEMON && strcmp(FORESTMQ_DAEMON, "1") == 0)
     {
         run_as_daemon = true;
