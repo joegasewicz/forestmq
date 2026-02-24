@@ -1,5 +1,9 @@
 site_name: Forest MQ
 
+nav:
+  - Home: index.md
+  - Protocol: protocol.md
+
 theme:
   name: material
   palette:

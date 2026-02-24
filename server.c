@@ -13,7 +13,6 @@
 #include "utils.h"
 #include "tcp.h"
 #include "server.h"
-#include "amqp.h"
 
 
 static char* get_req_method(enum evhttp_cmd_type cmd)
@@ -104,12 +103,14 @@ static void my_signal_event_cb(evutil_socket_t fd, short event, void *arg)
 static int start_server(FMQ_Server *s)
 {
     char http_addr[] = "0.0.0.0";
+    const int fmqp_port = 5742;
+
     ev_uint16_t http_port = (ev_uint16_t)s->port;
 
     struct event_base *base = event_base_new();
 
     // TODO Start AMPQ listener on port 5672 using the same event base
-    // start_amqp_listener(base, s->queue); TODO
+
 
     struct evhttp *http_server = evhttp_new(base);
 
