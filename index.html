@@ -10,9 +10,14 @@
       
       
       
+        <link rel="next" href="protocol/">
+      
+      
+        
+      
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
     
     
       
@@ -20,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.84d31ad4.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -46,7 +51,6 @@
     
       
 
-    
     
     
   </head>
@@ -212,9 +216,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -225,9 +234,14 @@
   
   
   <span class="md-ellipsis">
+    
+  
     Home
+  
+
     
   </span>
+  
   
 
       </a>
@@ -250,25 +264,9 @@
         <li class="md-nav__item">
   <a href="#project-status" class="md-nav__link">
     <span class="md-ellipsis">
-      Project Status
-    </span>
-  </a>
-  
-</li>
       
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      Quick Start
-    </span>
-  </a>
-  
-</li>
+        Project Status
       
-        <li class="md-nav__item">
-  <a href="#clients" class="md-nav__link">
-    <span class="md-ellipsis">
-      Clients*
     </span>
   </a>
   
@@ -277,7 +275,9 @@
         <li class="md-nav__item">
   <a href="#features" class="md-nav__link">
     <span class="md-ellipsis">
-      Features
+      
+        Features
+      
     </span>
   </a>
   
@@ -287,6 +287,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -320,25 +347,9 @@
         <li class="md-nav__item">
   <a href="#project-status" class="md-nav__link">
     <span class="md-ellipsis">
-      Project Status
-    </span>
-  </a>
-  
-</li>
       
-        <li class="md-nav__item">
-  <a href="#quick-start" class="md-nav__link">
-    <span class="md-ellipsis">
-      Quick Start
-    </span>
-  </a>
-  
-</li>
+        Project Status
       
-        <li class="md-nav__item">
-  <a href="#clients" class="md-nav__link">
-    <span class="md-ellipsis">
-      Clients*
     </span>
   </a>
   
@@ -347,7 +358,9 @@
         <li class="md-nav__item">
   <a href="#features" class="md-nav__link">
     <span class="md-ellipsis">
-      Features
+      
+        Features
+      
     </span>
   </a>
   
@@ -363,6 +376,7 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
@@ -375,20 +389,10 @@
 <p>⚠️ Production ready in v1.0.0</p>
 <h3 id="project-status">Project Status</h3>
 <p>🎉 ForestMQ is now usable for test / hobby projects or the curious.</p>
-<h3 id="quick-start">Quick Start</h3>
-<p>The quickest way to get ForestMQ is by using Docker.</p>
-<pre><code class="language-bash">docker run -p 8005:8005 josefdigital/forestmq:0.6.5
-</code></pre>
-<h3 id="clients">Clients*</h3>
-<ul>
-<li>ForestMQ Python client <a href="https://github.com/joegasewicz/forestmq-python">forestmq-python</a></li>
-<li>ForestMQ Go client (WIP) <a href="https://github.com/joegasewicz/forestmq-go">forestmq-go</a></li>
-</ul>
-<p>*<em>More clients will be available soon for Javascript / Typescript, Dart &amp; C.</em></p>
 <h3 id="features">Features</h3>
 <ul>
 <li>TCP ✅</li>
-<li>amqp-v2.0 🛠️</li>
+<li>amqp-v2.0 ✅</li>
 <li>Multiple queues <code>TODO</code></li>
 <li>Message acknowledgement <code>TODO</code></li>
 <li>Message durability / persist <code>TODO</code></li>
@@ -397,8 +401,8 @@
 <li>Docker ✅</li>
 <li>Daemon ✅</li>
 <li>Topics <code>TODO</code></li>
-<li>MacOS distribution with brew <code>TODO</code></li>
-<li>Linux distribution with snap <code>TODO</code></li>
+<li>MacOS distribution with brew <code>TODO</code>*</li>
+<li>Linux distribution with snap <code>TODO</code>*</li>
 <li>Message encryption <code>TODO</code></li>
 </ul>
 
@@ -449,10 +453,11 @@
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": [], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
