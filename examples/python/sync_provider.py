@@ -1,0 +1,13 @@
+from forestmq import ForestMQ
+
+def sync_example():
+    fmq = ForestMQ(domain="http://localhost:8005")
+    result = fmq.provider.send_msg_sync({
+        "id": 1,
+        "message": "Hello!",
+    })
+    print(f"Result: {result}")
+
+
+if __name__ == "__main__":
+    sync_example()
