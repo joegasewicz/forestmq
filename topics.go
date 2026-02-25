@@ -9,3 +9,7 @@ func NewTopicQueue(topicSize uint) *TopicQueue {
 		Channel: make(chan Message, topicSize),
 	}
 }
+
+func (tq *TopicQueue) Enqueue() {
+
+}
