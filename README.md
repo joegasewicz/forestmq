@@ -1,6 +1,6 @@
 ![Hero image](docs/docs/images/fmq_logo.png)
 
-# Welcome to ForestMQ Docs
+# Welcome to ForestMQ
 ⚠️ Production ready in v1.0.0
 
 ### Project Status
