@@ -1,13 +1,11 @@
 package forestmq
 
-import "github.com/joegasewicz/forestmq/pkg/topics"
-
 type Queue struct {
-	Topics map[string]*topics.TopicQueue
+	Topics map[string]*TopicQueue
 }
 
 func NewQueue() *Queue {
 	return &Queue{
-		Topics: make(map[string]*topics.TopicQueue, 0),
+		Topics: make(map[string]*TopicQueue),
 	}
 }
