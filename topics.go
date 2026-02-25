@@ -4,7 +4,7 @@ type TopicQueue struct {
 	Channel chan Message
 }
 
-func New(topicSize uint) *TopicQueue {
+func NewTopicQueue(topicSize uint) *TopicQueue {
 	return &TopicQueue{
 		Channel: make(chan Message, topicSize),
 	}

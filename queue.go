@@ -5,7 +5,10 @@ type Queue struct {
 }
 
 func NewQueue() *Queue {
+
+	topics := make(map[string]*TopicQueue)
+	topics["system"] = NewTopicQueue(1000)
 	return &Queue{
-		Topics: make(map[string]*TopicQueue),
+		Topics: topics,
 	}
 }
