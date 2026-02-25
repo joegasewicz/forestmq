@@ -1,4 +1,4 @@
-![Hero image](docs/docs/images/fmq_logo.png)
+![Hero image](images/fmq_logo.png)
 
 # Welcome to ForestMQ Docs
 ⚠️ Production ready in v1.0.0
