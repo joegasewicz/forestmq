@@ -6,16 +6,21 @@ type Queue struct {
 
 func NewQueue() *Queue {
 	topics := make(map[string]*TopicQueue)
-	topics["system"] = NewTopicQueue(1000)
+
 	return &Queue{
 		Topics: topics,
 	}
 }
 
-func (q *Queue) Enqueue(topic string) {
-	q.Topics[topic].Channel
+func (q *Queue) Enqueue(topicName string, message *Message) {
+	q.Topics[topicName].Enqueue(message)
 }
 
-func (q *Queue) Dequeue() {
+func (q *Queue) Dequeue(topicName string) Message {
+	return q.Topics[topicName].Dequeue()
+}
 
+func (q *Queue) NewTopic(topicName string) *TopicQueue {
+	q.Topics[topicName] = NewTopicQueue(1)
+	return q.Topics[topicName]
 }

@@ -7,16 +7,16 @@
 Forest MQ is currently in development.
 
 ### Features
-- TCP `TODO`
-- fmqp-v1.0 `TODO`
-- Multiple queues `TODO`
+- TCP ✅
+- fmqp-v1.0 ✅
+- Multiple queues ✅
 - Message acknowledgement `TODO`
 - Message durability / persist `TODO`
 - exchange types (e.g. fan) `TODO`
 - Logging `TODO`
 - Docker `TODO`
 - Daemon `TODO`
-- Topics `TODO`
+- Topics ✅
 - MacOS distribution with brew `TODO`*
 - Linux distribution with snap `TODO`*
 - Message encryption `TODO`

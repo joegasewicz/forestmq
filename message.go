@@ -1,20 +1,11 @@
 package forestmq
 
-import (
-	"time"
-
-	"github.com/joegasewicz/forestmq/pkg/schemas"
-)
-
 type Message struct {
-	CreatedAt time.Time
+	Content interface{}
 }
 
-func NewMessage() *Message {
-
-	return &Message{}
-}
-
-func (m *Message) Send(channel chan TopicQueue, message schemas.Message) {
-	channel <- message
+func NewMessage(content interface{}) *Message {
+	return &Message{
+		Content: content,
+	}
 }
