@@ -11,9 +11,11 @@ import (
 )
 
 func main() {
+	// TODO move into forestmq.go
 	queue := forestmq.NewQueue()
+	fmqp := forestmq.NewFMQP()
 	ctx, cancel := context.WithCancel(context.Background())
-	tcp := forestmq.NewTCP(queue)
+	tcp := forestmq.NewTCP(queue, fmqp)
 	go func() {
 		if err := tcp.Start(ctx, ":7632"); err != nil {
 			log.Printf("TCP server error: %v", err)
