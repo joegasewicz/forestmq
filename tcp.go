@@ -2,20 +2,29 @@ package forestmq
 
 import (
 	"context"
+	"io"
 	"log"
 	"net"
 	"sync"
+)
+
+var (
+	MAGIC      = []byte("FMQP")
+	RESP_ERROR = []byte{0x00}
+	RESP_OK    = []byte{0x01}
 )
 
 type TCP struct {
 	Listener net.Listener
 	WG       sync.WaitGroup
 	Queue    *Queue
+	FMQP     *FMQP
 }
 
-func NewTCP(q *Queue) *TCP {
+func NewTCP(q *Queue, fmqp *FMQP) *TCP {
 	return &TCP{
 		Queue: q,
+		FMQP:  fmqp,
 	}
 }
 
@@ -60,18 +69,35 @@ func (t *TCP) acceptConn(ctx context.Context) {
 func (t *TCP) handleConn(ctx context.Context, conn net.Conn) {
 	defer t.WG.Done()
 	defer conn.Close()
-	buff := make([]byte, 1024)
+	buff := make([]byte, 6)
 	for {
 		select {
 		case <-ctx.Done():
 			return
 		default:
-			n, err := conn.Read(buff)
-			log.Printf("n -----> n: %d", n)
+			bytesRead, err := conn.Read(buff)
 			if err != nil {
-				log.Printf("Error reading from buffer: %v", err)
 				return
 			}
+			log.Printf("Bytes Read: %d\n\t-Buffer: %v", bytesRead, buff[:bytesRead])
+
+			// Get Magic - first 4 bytes
+			magicBuff := make([]byte, 4)
+			_, err = io.ReadFull(conn, magicBuff)
+			if err != nil {
+				conn.Write(RESP_ERROR)
+				return
+			}
+			err = t.FMQP.ReadMagic(magicBuff)
+			if err != nil {
+				log.Printf("Client error: %v", err)
+				conn.Write(RESP_ERROR)
+				return
+			}
+			// Get Version - next 2 bytes
+
+			// Send acknowledgement to client
+
 			conn.Write([]byte("Message received\n"))
 		}
 	}

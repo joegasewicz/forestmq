@@ -12,8 +12,8 @@ func NewQueue() *Queue {
 	}
 }
 
-func (q *Queue) Enqueue(topicName string, message *Message) {
-	q.Topics[topicName].Enqueue(message)
+func (q *Queue) Enqueue(topicName string, message *Message) (error, *Message) {
+	return q.Topics[topicName].Enqueue(message)
 }
 
 func (q *Queue) Dequeue(topicName string) Message {
