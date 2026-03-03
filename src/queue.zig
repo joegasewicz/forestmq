@@ -55,3 +55,7 @@ pub const Queue = struct {
     }
 
 };
+
+test "Queue.init" {
+    try std.testing.expectError(expected_error: anyerror, actual_error_union: anytype)
+}

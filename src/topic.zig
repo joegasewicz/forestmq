@@ -6,5 +6,4 @@ pub const Topic = struct {
         };
     }
 
-
 };
