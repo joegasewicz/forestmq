@@ -58,5 +58,43 @@ pub const Queue = struct {
 
 test "Queue.init" {
     var q = try Queue.init(std.testing.allocator, 10);
+    defer q.deinit();
+    try std.testing.expectEqual(0, q.head);
+    try std.testing.expectEqual(0, q.tail);
+    try std.testing.expectEqual(0, q.len);
+
+
+}
+
+test "Queue.deinit" {
+    var q = try Queue.init(std.testing.allocator, 10);
     q.deinit();
+}
+
+test "Queue.isEmpty" {
+    var q = try Queue.init(std.testing.allocator, 10);
+    defer q.deinit();
+    try std.testing.expect(q.isEmpty());
+
+    // Test isEmpty returns false
+    var msg = Message{
+        .topic = "test",
+        .body = "hello"
+    };
+    try q.push(&msg);
+    try std.testing.expect(q.isEmpty() == false);
+}
+
+test "Queue.isFull" {
+    var q = try Queue.init(std.testing.allocator, 1);
+    defer q.deinit();
+    try std.testing.expect(q.isFull() == false);
+
+    // test queue is full
+    var msg = Message{
+        .topic = "test",
+        .body = "hello"
+    };
+    try q.push(&msg);
+    try std.testing.expect(q.isFull());
 }
