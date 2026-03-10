@@ -5,14 +5,16 @@ pub const ForestMQ = struct {
 
     allocator: std.mem.Allocator,
 
-    pub fn init() !Self {
-       return ForestMQ{
-
+    pub fn init(allocator: std.mem.Allocator) !Self {
+       return Self{
+        .allocator = allocator,
        };
     }
 };
 
 
-test "init" {
-
+test "ForestMQ.init success" {
+    const fq = try ForestMQ.init(std.testing.allocator);
+    _ = fq;
 }
+
