@@ -23,5 +23,13 @@ TODO
 ### Contributions
 TODO
 
+### Docs
+Build & run the docs locally.
+```bash
+cd docs
+pipenv shell && pipenv install --dev
+pipenv run mkdocs build
+```
+
 ### Contact
 [josef.digital](https://josef.digital)
