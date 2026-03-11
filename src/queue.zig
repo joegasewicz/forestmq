@@ -62,8 +62,6 @@ test "Queue.init" {
     try std.testing.expectEqual(0, q.head);
     try std.testing.expectEqual(0, q.tail);
     try std.testing.expectEqual(0, q.len);
-
-
 }
 
 test "Queue.deinit" {
@@ -97,4 +95,47 @@ test "Queue.isFull" {
     };
     try q.push(&msg);
     try std.testing.expect(q.isFull());
+}
+
+test "Queue.push" {
+    var q = try Queue.init(std.testing.allocator, 3);
+    defer q.deinit();
+    var msg1 = Message{
+        .topic = "test1",
+        .body = "hello1"
+    };
+    var msg2 = Message{
+        .topic = "test2",
+        .body = "hello2"
+    };
+    try q.push(&msg1);
+    try q.push(&msg2);
+
+    try std.testing.expectEqual("test1", q.buffer[0].topic);
+    try std.testing.expectEqual("hello1", q.buffer[0].body);
+    try std.testing.expectEqual("test2", q.buffer[1].topic);
+    try std.testing.expectEqual("hello2", q.buffer[1].body);
+}
+
+test "Queue.pop" {
+    var q = try Queue.init(std.testing.allocator, 3);
+    defer q.deinit();
+    var msg1 = Message{
+        .topic = "test1",
+        .body = "hello1"
+    };
+    var msg2 = Message{
+        .topic = "test2",
+        .body = "hello2"
+    };
+    try q.push(&msg1);
+    try q.push(&msg2);
+
+    const message1 = try q.pop();
+    const message2 = try q.pop();
+
+    try std.testing.expectEqual("test1", message1.topic);
+    try std.testing.expectEqual("hello1", message1.body);
+    try std.testing.expectEqual("test2", message2.topic);
+    try std.testing.expectEqual("hello2", message2.body);
 }
