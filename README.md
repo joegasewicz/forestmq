@@ -1,4 +1,5 @@
 [![Zig Tests](https://github.com/joegasewicz/forestmq/actions/workflows/test.yml/badge.svg)](https://github.com/joegasewicz/forestmq/actions/workflows/test.yml)
+[![Deploy docs to GitHub Pages](https://github.com/joegasewicz/forestmq/actions/workflows/pages.yml/badge.svg)](https://github.com/joegasewicz/forestmq/actions/workflows/pages.yml)
 
 ![ForestMQ](docs/docs/images/fmq_logo.png?raw=true "ForestMQ")
 
