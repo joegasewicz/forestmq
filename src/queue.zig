@@ -67,8 +67,6 @@ test "Queue.init" {
 test "Queue.deinit" {
     var q = try Queue.init(std.testing.allocator, 10);
     q.deinit();
-
-
 }
 
 test "Queue.isEmpty" {
