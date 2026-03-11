@@ -1,4 +1,5 @@
 [![Zig Tests](https://github.com/joegasewicz/forestmq/actions/workflows/test.yml/badge.svg)](https://github.com/joegasewicz/forestmq/actions/workflows/test.yml)
+
 ![ForestMQ](docs/docs/images/fmq_logo.png?raw=true "ForestMQ")
 
 ⚠️ Production ready in v1.0.0, ready to use in v0.1.0.
