@@ -1,7 +1,5 @@
 .idea
 
-# Docs
-docs/site
 
 .zig-cache/
 zig-out/
