@@ -1,7 +1,12 @@
 const std = @import("std");
-const topic_module = @import("./topic.zig");
+const config_mod = @import("./config.zig");
+const message_mod = @import("./message.zig");
+const topic_mod = @import("./topic.zig");
 
-const Topic = topic_module.Topic;
+const log = std.log;
+const Message = message_mod.Message;
+const Topic = topic_mod.Topic;
+
 
 pub const ForestMQ = struct {
     const Self = @This();
@@ -10,6 +15,7 @@ pub const ForestMQ = struct {
     topics: Topic,
 
     pub fn init(allocator: std.mem.Allocator) !Self {
+       config_mod.printPreamble();
        return Self{
             .allocator = allocator,
             .topics = try Topic.init(allocator),
@@ -17,10 +23,15 @@ pub const ForestMQ = struct {
     }
 
     pub fn deinit(self: *Self) void {
+        log.debug("Deinitizing ForestMQ...", .{});
         self.topics.deinit();
         self.* = undefined;
     }
 
+    pub fn createTopic(self: *Self, name: []const u8, capacity: usize) !void {
+        log.info("Creating new topic: {s}" , .{name});
+        try self.topics.add(name, capacity);
+    }
 };
 
 
@@ -31,3 +42,11 @@ test "ForestMQ.init success" {
     try std.testing.expect(fq.topics.topic_map.count() == 0);
 }
 
+test "ForestMQ.createTopic" {
+    var fq = try ForestMQ.init(std.testing.allocator);
+    defer fq.deinit();
+
+    try fq.createTopic("emails", 2);
+    const key = fq.topics.topic_map.getKey("emails");
+    try std.testing.expectEqualStrings("emails", key.?);
+}

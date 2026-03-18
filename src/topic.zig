@@ -1,6 +1,7 @@
 const std = @import("std");
 const queue_mod = @import("./queue.zig");
 
+const log = std.log;
 const Queue = queue_mod.Queue;
 
 pub const Topic = struct {
@@ -19,7 +20,9 @@ pub const Topic = struct {
     pub fn deinit(self: *Self) void {
         var iterator = self.topic_map.iterator();
         while (iterator.next()) |entry| {
-            self.allocator.free(entry.key_ptr.*);
+            const key = entry.key_ptr.*;
+            self.allocator.free(key);
+            log.debug("Deinitializing {s} queue...", .{key});
             entry.value_ptr.deinit(); // Deinit each queue
         }
         self.topic_map.deinit();
