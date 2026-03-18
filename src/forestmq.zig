@@ -39,6 +39,10 @@ pub const ForestMQ = struct {
     pub fn publish(self: *Self, topic_name: []const u8, msg: *Message) !void {
         try self.topics.push(topic_name, msg);
     }
+
+    pub fn consume(self: *Self, topic_name: []const u8) !*Message {
+        return self.topics.pop(topic_name);
+    }
 };
 
 
@@ -49,6 +53,11 @@ test "ForestMQ.init success" {
     try std.testing.expect(fq.topics.topic_map.count() == 0);
 }
 
+test "ForestMQ.deinit success" {
+    var fq = try ForestMQ.init(std.testing.allocator);
+    defer fq.deinit();
+}
+
 test "ForestMQ.createTopic" {
     var fq = try ForestMQ.init(std.testing.allocator);
     defer fq.deinit();
@@ -56,4 +65,38 @@ test "ForestMQ.createTopic" {
     try fq.createTopic("emails", 2);
     const key = fq.topics.topic_map.getKey("emails");
     try std.testing.expectEqualStrings("emails", key.?);
+}
+
+test "ForestMQ.deleteTopic" {
+    var fq = try ForestMQ.init(std.testing.allocator);
+    defer fq.deinit();
+
+    try fq.createTopic("emails", 2);
+    try std.testing.expect(fq.topics.get("emails") != null);
+    try std.testing.expect(fq.topics.get("emails2") == null);
+}
+
+test "ForestMQ.publish" {
+    var fq = try ForestMQ.init(std.testing.allocator);
+    defer fq.deinit();
+
+    try fq.createTopic("emails", 2);
+    try std.testing.expect(fq.topics.get("emails") != null);
+
+    var msg1 = Message.init("emails", "message #1", 0);
+    try fq.publish("emails", &msg1);
+}
+
+test "ForestMQ.pop" {
+    var fq = try ForestMQ.init(std.testing.allocator);
+    defer fq.deinit();
+
+    try fq.createTopic("emails", 2);
+    try std.testing.expect(fq.topics.get("emails") != null);
+
+    var msg1 = Message.init("emails", "message #1", 0);
+    try fq.publish("emails", &msg1);
+
+    const popped_msg1 = try fq.consume("emails");
+    try std.testing.expectEqual("emails", popped_msg1.topic);
 }
