@@ -1,6 +1,9 @@
 const std = @import("std");
 const queue_mod = @import("./queue.zig");
+const message_mod = @import("./message.zig");
 
+const log = std.log;
+const Message = message_mod.Message;
 const Queue = queue_mod.Queue;
 
 pub const Topic = struct {
@@ -19,7 +22,9 @@ pub const Topic = struct {
     pub fn deinit(self: *Self) void {
         var iterator = self.topic_map.iterator();
         while (iterator.next()) |entry| {
-            self.allocator.free(entry.key_ptr.*);
+            const key = entry.key_ptr.*;
+            self.allocator.free(key);
+            log.debug("Deinitializing {s} queue...", .{key});
             entry.value_ptr.deinit(); // Deinit each queue
         }
         self.topic_map.deinit();
@@ -53,6 +58,16 @@ pub const Topic = struct {
         self.allocator.free(removed.key);
         var queue = removed.value;
         queue.deinit();
+    }
+
+    pub fn push(self: *Self, topic: []const u8, msg: *Message) !void {
+        const q = self.get(topic) orelse return error.TopicNotFound;
+        try q.push(msg);
+    }
+
+    pub fn pop(self: *Self, topic: []const u8) !*Message {
+        const q = self.get(topic) orelse return error.TopicNotFound;
+        return q.pop();
     }
 };
 
@@ -93,4 +108,53 @@ test "Topic.remove" {
 
     try std.testing.expect(emailQueue == null);
     try std.testing.expect(agentQueue != null);
+}
+
+test "Topic.get" {
+    var t = try Topic.init(std.testing.allocator);
+    defer t.deinit();
+
+    try t.add("emails", 1);
+    try t.add("agents", 1);
+
+    const emailQueue = t.get("emails");
+    try std.testing.expect(emailQueue != null);
+}
+
+test "Topic.push" {
+    var t = try Topic.init(std.testing.allocator);
+    defer t.deinit();
+
+    try t.add("emails", 1);
+    try t.add("agents", 1);
+
+    const emailQueue = t.get("emails");
+    var msg1 = Message.init("emails", "message #1", 0);
+    try emailQueue.?.push(&msg1);
+
+    const msgPopped = try emailQueue.?.pop();
+    try std.testing.expectEqual("emails", msgPopped.topic);
+}
+
+test "Topic.pop" {
+    var t = try Topic.init(std.testing.allocator);
+    defer t.deinit();
+
+    try t.add("emails", 3);
+    try t.add("agents", 1);
+
+    const emailQueue = t.get("emails");
+    var msg1 = Message.init("emails", "message #1", 0);
+    var msg2 = Message.init("emails", "message #2", 0);
+    var msg3 = Message.init("emails", "message #3", 0);
+    try emailQueue.?.push(&msg1);
+    try emailQueue.?.push(&msg2);
+    try emailQueue.?.push(&msg3);
+
+    const msgPopped1 = try emailQueue.?.pop();
+    const msgPopped2 = try emailQueue.?.pop();
+    const msgPopped3 = try emailQueue.?.pop();
+    try std.testing.expectEqual("message #1", msgPopped1.body);
+    try std.testing.expectEqual("message #2", msgPopped2.body);
+    try std.testing.expectEqual("message #3", msgPopped3.body);
 }

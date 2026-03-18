@@ -1,6 +1,7 @@
 const std = @import("std");
 const message = @import("./message.zig");
 
+const log = std.log;
 const Message = message.Message;
 
 pub const Queue = struct {
@@ -51,6 +52,7 @@ pub const Queue = struct {
         // This will be the current length of the buffer or 0.
         self.head = (self.head + 1) % self.buffer.len;
         self.len -= 1;
+        log.info("Dequeued message successfully", .{});
         return msg;
     }
 
