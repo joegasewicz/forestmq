@@ -1,3 +1,4 @@
+const std = @import("std");
 
 pub const Message = struct {
 
@@ -10,7 +11,7 @@ pub const Message = struct {
     pub fn init(
         topic: []const u8,
         body: []const u8,
-        flags: []const u8,
+        flags: u8,
     ) Self {
         return Self{
             .topic = topic,
@@ -19,3 +20,10 @@ pub const Message = struct {
         };
     }
 };
+
+test "Message.init" {
+    const m = Message.init("emails", "body message", 0);
+    try std.testing.expectEqual("emails", m.topic);
+    try std.testing.expectEqual("body message", m.body);
+    try std.testing.expectEqual(0, m.flags);
+}

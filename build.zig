@@ -67,6 +67,22 @@ pub fn build(b: *std.Build) void {
     });
     const run_topic_test = b.addRunArtifact(topic_tests);
     test_step.dependOn(&run_topic_test.step);
+    // ------------------------------------
+    // ==================================
+    // topics Tests
+    // ==================================
+    const message_module = b.addModule("message", .{
+        .root_source_file = b.path("src/message.zig"),
+        .target =  target,
+        .optimize = optimize,
+    });
+    const message_tests = b.addTest(.{
+        .root_module = message_module,
+    });
+    const run_message_test = b.addRunArtifact(message_tests);
+    test_step.dependOn(&run_message_test.step);
+    // ------------------------------------
+
     // Run steps
     b.installArtifact(exe);
     const run_step = b.step("run", "Run the app");
