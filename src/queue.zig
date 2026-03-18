@@ -54,6 +54,10 @@ pub const Queue = struct {
         return msg;
     }
 
+    pub fn length(self: *Self) usize {
+        return self.len;
+    }
+
 };
 
 test "Queue.init" {
@@ -138,4 +142,23 @@ test "Queue.pop" {
     try std.testing.expectEqual("hello1", message1.body);
     try std.testing.expectEqual("test2", message2.topic);
     try std.testing.expectEqual("hello2", message2.body);
+}
+
+test "Queue.length" {
+    var q = try Queue.init(std.testing.allocator, 3);
+    defer q.deinit();
+    var msg1 = Message{
+        .topic = "test1",
+        .body = "hello1"
+    };
+    var msg2 = Message{
+        .topic = "test2",
+        .body = "hello2"
+    };
+
+    try std.testing.expectEqual(@as(usize, 0), q.length());
+    try q.push(&msg1);
+    try std.testing.expectEqual(@as(usize, 1), q.length());
+    try q.push(&msg2);
+    try std.testing.expectEqual(@as(usize, 2), q.length());
 }
