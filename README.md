@@ -3,6 +3,8 @@
 
 ![ForestMQ](docs/docs/images/fmq_logo.png?raw=true "ForestMQ")
 
+ForestMQ is a rewrite of my original queue ([ForestMQ](https://github.com/joegasewicz/forestmq-old)) but with added features.
+
 ⚠️ Production ready in v1.0.0, ready to use in v0.1.0.
 
 ### Project Status
