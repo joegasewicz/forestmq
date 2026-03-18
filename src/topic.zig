@@ -1,7 +1,9 @@
 const std = @import("std");
 const queue_mod = @import("./queue.zig");
+const message_mod = @import("./message.zig");
 
 const log = std.log;
+const Message = message_mod.Message;
 const Queue = queue_mod.Queue;
 
 pub const Topic = struct {
@@ -56,6 +58,11 @@ pub const Topic = struct {
         self.allocator.free(removed.key);
         var queue = removed.value;
         queue.deinit();
+    }
+
+    pub fn push(self: *Self, topic: []const u8, msg: *Message) !void {
+        const q = self.get(topic) orelse return error.TopicNotFound;
+        try q.push(msg);
     }
 };
 

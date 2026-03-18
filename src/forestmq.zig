@@ -7,7 +7,6 @@ const log = std.log;
 const Message = message_mod.Message;
 const Topic = topic_mod.Topic;
 
-
 pub const ForestMQ = struct {
     const Self = @This();
 
@@ -31,6 +30,14 @@ pub const ForestMQ = struct {
     pub fn createTopic(self: *Self, name: []const u8, capacity: usize) !void {
         log.info("Creating new topic: {s}" , .{name});
         try self.topics.add(name, capacity);
+    }
+
+    pub fn deleteTopic(self: *Self, name: []const u8) !void {
+        try self.topics.remove(name);
+    }
+
+    pub fn publish(self: *Self, topic_name: []const u8, msg: *Message) !void {
+        try self.topics.push(topic_name, msg);
     }
 };
 
