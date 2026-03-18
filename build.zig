@@ -54,7 +54,19 @@ pub fn build(b: *std.Build) void {
     const run_queue_test = b.addRunArtifact(queue_tests);
     test_step.dependOn(&run_queue_test.step);
     // ------------------------------------
-
+    // ==================================
+    // topics Tests
+    // ==================================
+    const topic_module = b.addModule("topic", .{
+        .root_source_file = b.path("src/topic.zig"),
+        .target =  target,
+        .optimize = optimize,
+    });
+    const topic_tests = b.addTest(.{
+        .root_module = topic_module,
+    });
+    const run_topic_test = b.addRunArtifact(topic_tests);
+    test_step.dependOn(&run_topic_test.step);
     // Run steps
     b.installArtifact(exe);
     const run_step = b.step("run", "Run the app");
