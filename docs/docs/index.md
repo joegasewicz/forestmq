@@ -10,4 +10,4 @@ A message queue.
 
 
 ### Contact
-[josef.digital](https://josef.digital)
+[josefdigital.com](https://josefdigital.com)
