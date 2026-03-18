@@ -35,4 +35,4 @@ pipenv run mkdocs build
 ```
 
 ### Contact
-[josef.digital](https://josef.digital)
+[josefdigital.com](https://josefdigital.com)
