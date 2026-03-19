@@ -1,6 +1,5 @@
 const std = @import("std");
 
-
 pub const ANSI_GREEN = "\x1b[32m";
 pub const ANSI_RESET = "\x1b[0m";
 pub const FMQP_MAGIC = "FMQP";
