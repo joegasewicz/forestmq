@@ -13,6 +13,8 @@ ForestMQ is a rewrite of my original queue ([ForestMQ](https://github.com/joegas
 #### Run with Docker
 [Official Docker hub account for ForestMQ](https://hub.docker.com/u/forestmq)
 
+### Python Client
+There is a Python client that will be available on PYPI soon...
 
 ### Support
 See [Contact](#contact)
