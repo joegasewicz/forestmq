@@ -1,13 +1,10 @@
 import asyncio
-from typing import Union
-
-from codecs import StreamReader, StreamWriter
 
 
 class Client:
 
-    reader: StreamReader
-    writer: StreamWriter
+    reader: asyncio.StreamReader
+    writer: asyncio.StreamWriter
 
     def __init__(
             self,
@@ -23,8 +20,8 @@ class Client:
             self.port,
         )
 
-    async def send(self, data: bytes) -> None:
-        self.writer.write(data)
+    async def send(self, message: bytes) -> None:
+        self.writer.write(message)
         await self.writer.drain()
 
     async def receive(self, n: int):
