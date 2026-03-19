@@ -2,7 +2,20 @@ const std = @import("std");
 
 const log = std.log;
 
+/// Struct reflects all FMQP protocol operations
+///
+/// Header data frame:
+/// | PROTOCOL (4 bytes)     |
+/// | VERSION (2 bytes)      |
+/// | FLAGS (1 byte)         |
+/// | TOPIC LENGTH (2 bytes) |
+/// | BODY LENGTH (2 bytes)  |
+///
+/// Body data frame:
+/// | TOPIC                  |
+/// | BODY                   |
 pub const Protocol = struct {
+
     const Self = @This();
 
     header: [6]u8,
@@ -13,6 +26,7 @@ pub const Protocol = struct {
         };
     }
 
+    /// Gets the protocol bytes e.g. `FMQP`
     pub fn protocol(self: *Self) []const u8 {
         return self.header[0..4];
     }
