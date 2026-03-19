@@ -1,8 +1,11 @@
 .idea
+*/.idea
+notes
 
 # Docs
 docs/site
 
+# Zig
 .zig-cache/
 zig-out/
 /release/
@@ -10,3 +13,25 @@ zig-out/
 /build/
 /build-*/
 /docgen_tmp/
+
+# Python
+__pycache__/
+*.py[codz]
+*$py.class
+
+*/develop-eggs/
+*/dist/
+*/downloads/
+*/eggs/
+*/.eggs/
+
+*/.env
+*/.envrc
+*/.venv
+*/env/
+*/venv/
+*/ENV/
+*/env.bak/
+*/venv.bak/
+
+*/.pypirc

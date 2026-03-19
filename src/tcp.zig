@@ -19,7 +19,7 @@ pub const TCP = struct {
     // }
 
     pub fn serve(self: *Self) !void {
-        const addr = try std.net.Address.parseIp(self.host, 8752);
+        const addr = try std.net.Address.parseIp(self.host, 4379);
         var server = try std.net.Address.listen(addr, .{ .reuse_address = true });
         defer server.deinit();
 
@@ -41,5 +41,18 @@ pub const TCP = struct {
 
     pub fn accept(conn: Connection) !void {
         defer conn.stream.close();
+        const client_conn_addr = conn.address;
+        const recv_buffer: [1024]u8 = undefined;
+        const send_buffer: [100]u8 = undefined;
+        var connection_br = conn.stream.read(&recv_buffer);
+        var connection_bw = conn.stream.writer(send_buffer);
+
+        log.debug("New client connected: {f}", .{client_conn_addr});
+
+        // Parse FMQP protocol
+
+
+        // FMQP protocol response
+
     }
 };

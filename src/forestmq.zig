@@ -14,11 +14,12 @@ pub const ForestMQ = struct {
     topics: Topic,
 
     pub fn init(allocator: std.mem.Allocator) !Self {
-       config_mod.printPreamble();
-       return Self{
+        var buf: [64]u8 = undefined;
+        try config_mod.printPreamble(&buf);
+        return Self{
             .allocator = allocator,
             .topics = try Topic.init(allocator),
-       };
+        };
     }
 
     pub fn deinit(self: *Self) void {
