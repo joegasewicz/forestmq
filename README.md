@@ -10,24 +10,17 @@ ForestMQ is a rewrite of my original queue ([ForestMQ](https://github.com/joegas
 ### Project Status
 👷‍♂️In development...
 
-### Quick Start
 #### Run with Docker
-[Official Docker hub for ForestMQ](https://hub.docker.com/u/forestmq)
+[Official Docker hub account for ForestMQ](https://hub.docker.com/u/forestmq)
 
-Coming soon...
-
-### Clients
-
-### Health
-
-### Security
-N/A
 
 ### Support
-TODO
+See [Contact](#contact)
+
 
 ### Contributions
-TODO
+I will be taking contributions in the near future.
+
 
 ### Docs
 Build & run the docs locally.
