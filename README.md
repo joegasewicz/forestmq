@@ -7,24 +7,24 @@ ForestMQ is a rewrite of my original queue ([ForestMQ](https://github.com/joegas
 
 ⚠️ Production ready in v1.0.0, ready to use in v0.1.0.
 
-### Project Status
+## Project Status
 👷‍♂️In development...
 
-#### Run with Docker
+### Run with Docker
 [Official Docker hub account for ForestMQ](https://hub.docker.com/u/forestmq)
 
-### Python Client
+## Python Client
 There is a Python client that will be available on PYPI soon...
 
 ### Support
 See [Contact](#contact)
 
 
-### Contributions
+## Contributions
 I will be taking contributions in the near future.
 
 
-### Docs
+## Docs
 Build & run the docs locally.
 ```bash
 cd docs
@@ -32,5 +32,5 @@ pipenv shell && pipenv install --dev
 pipenv run mkdocs build
 ```
 
-### Contact
+## Contact
 [josefdigital.com](https://josefdigital.com)
