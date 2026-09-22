@@ -39,7 +39,7 @@ if (APPLE)
     target_include_directories(
             forest_mq
             PRIVATE
-            ${BREW_ROOT}/Cellar/jansson/2.14.1/include
+            ${BREW_ROOT}/Cellar/jansson/2.15.1/include
             ${BREW_ROOT}/Cellar/libevent/2.1.12_1/include
             ${BREW_ROOT}/Cellar/rabbitmq-c/0.15.0/include
     )
@@ -57,7 +57,7 @@ if (APPLE)
     target_link_libraries(
             forest_mq
             PRIVATE
-            ${BREW_ROOT}/Cellar/jansson/2.14.1/lib/libjansson.dylib
+            ${BREW_ROOT}/Cellar/jansson/2.15.1/lib/libjansson.dylib
             ${BREW_ROOT}/Cellar/libevent/2.1.12_1/lib/libevent.dylib
             ${BREW_ROOT}/Cellar/rabbitmq-c/0.15.0/lib/librabbitmq.dylib
     )

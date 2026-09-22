@@ -53,12 +53,13 @@
 #define FMQ_ALLOWED_HOSTS_LENGTH 10
 #define FMQ_ALLOWED_HOSTS_BYTES 1080
 #define FMQ_DEFAULT_ALLOWED_HOSTS "localhost,0.0.0.0,127.0.0.1,host.docker.internal"
+#define FMQ_VERSION "v0.6.5\n\n"
 /* ANSI STRING */
 #define FMQ_PREAMBLE_MSG "\n" \
 "   / ____/ __ \\/ __ \\/ ____/ ___/_  __/  /  |/  / __ \\\n" \
 "  / /_  / / / / /_/ / __/  \\__ \\ / /    / /|_/ / / / /\n" \
 " / __/ / /_/ / _, _/ /___ ___/ // /    / /  / / /_/ / \n" \
-"/_/    \\____/_/ |_/_____//____//_/    /_/  /_/\\___\\_\\ \n\n"
+"/_/    \\____/_/ |_/_____//____//_/    /_/  /_/\\___\\_\\ \n"
 
 
 #endif //CONFIG_H

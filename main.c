@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
     const char *FORESTMQ_PORT = getenv("FORESTMQ_PORT");
 
     printf(ANSI_COLOR_GREEN FMQ_PREAMBLE_MSG ANSI_COLOR_RESET);
+    printf(ANSI_COLOR_MAGENTA FMQ_VERSION ANSI_COLOR_RESET);
 
     if (FORESTMQ_DAEMON && strcmp(FORESTMQ_DAEMON, "1") == 0)
     {
