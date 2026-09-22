@@ -10,7 +10,7 @@ Message Queue built on [libevent](https://libevent.org/)
 
 ### Features
 - TCP ✅
-- amqp-v2.0 ✅
+- FMQP `TODO`
 - Multiple queues `TODO`
 - Message acknowledgement `TODO`
 - Message durability / persist `TODO`
@@ -22,3 +22,4 @@ Message Queue built on [libevent](https://libevent.org/)
 - MacOS distribution with brew `TODO`*
 - Linux distribution with snap `TODO`*
 - Message encryption `TODO`
+
